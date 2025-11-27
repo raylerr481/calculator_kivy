@@ -1,72 +1,52 @@
-<CalcLayout>:
+<CalculatorLayout>:
     orientation: "vertical"
-    padding: 10
-    spacing: 10
+    padding: 20
+    spacing: 20
 
     TextInput:
-        id: input
-        font_size: 40
-        halign: "right"
-        size_hint_y: 0.2
+        id: num1
+        hint_text: "Número 1"
+        font_size: 32
+        size_hint_y: None
+        height: 80
+        multiline: False
 
-    GridLayout:
-        cols: 4
+    TextInput:
+        id: num2
+        hint_text: "Número 2"
+        font_size: 32
+        size_hint_y: None
+        height: 80
+        multiline: False
+
+    BoxLayout:
+        size_hint_y: None
+        height: 80
         spacing: 10
-        size_hint_y: 0.8
 
-        Button:
-            text: "7"
-            on_release: root.press_button(self.text)
-        Button:
-            text: "8"
-            on_release: root.press_button(self.text)
-        Button:
-            text: "9"
-            on_release: root.press_button(self.text)
-        Button:
-            text: "/"
-            on_release: root.press_button(self.text)
-
-        Button:
-            text: "4"
-            on_release: root.press_button(self.text)
-        Button:
-            text: "5"
-            on_release: root.press_button(self.text)
-        Button:
-            text: "6"
-            on_release: root.press_button(self.text)
-        Button:
-            text: "*"
-            on_release: root.press_button(self.text)
-
-        Button:
-            text: "1"
-            on_release: root.press_button(self.text)
-        Button:
-            text: "2"
-            on_release: root.press_button(self.text)
-        Button:
-            text: "3"
-            on_release: root.press_button(self.text)
-        Button:
-            text: "-"
-            on_release: root.press_button(self.text)
-
-        Button:
-            text: "0"
-            on_release: root.press_button(self.text)
-        Button:
-            text: "."
-            on_release: root.press_button(self.text)
-        Button:
-            text: "C"
-            on_release: root.press_button(self.text)
         Button:
             text: "+"
-            on_release: root.press_button(self.text)
+            font_size: 32
+            on_release: root.calculate('+')
 
         Button:
-            text: "="
-            font_size: 40
-            on_release: root.press_button(self.text)
+            text: "-"
+            font_size: 32
+            on_release: root.calculate('-')
+
+        Button:
+            text: "*"
+            font_size: 32
+            on_release: root.calculate('*')
+
+        Button:
+            text: "/"
+            font_size: 32
+            on_release: root.calculate('/')
+
+    Label:
+        id: result
+        text: "Resultado"
+        font_size: 40
+        size_hint_y: None
+        height: 80
