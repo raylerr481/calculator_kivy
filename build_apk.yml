@@ -2,7 +2,7 @@ name: Build APK
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -10,26 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: |
-        sudo apt update
-        sudo apt install -y python3 python3-pip python3-setuptools
-        sudo apt install -y zip unzip openjdk-17-jdk
+      - name: Install system dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            python3 python3-pip python3-setuptools python3-dev \
+            build-essential git zip unzip \
+            openjdk-17-jdk \
+            libffi-dev libssl-dev \
+            liblzma-dev zlib1g-dev \
+            gcc g++ \
+            pkg-config
 
-    - name: Install Buildozer
-      run: |
-        pip install --upgrade pip
-        pip install buildozer
-        pip install cython
+      - name: Install Buildozer
+        run: |
+          pip install --upgrade cython buildozer virtualenv
 
-    - name: Build APK
-      run: |
-        buildozer android debug
+      - name: Build APK
+        run: |
+          buildozer android debug
 
-    - name: Upload APK artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: KivyCalculator-APK
-        path: bin/*.apk
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: CalculatorKivy-APK
+          path: bin/*.apk
