@@ -1,21 +1,20 @@
 [app]
-title = Calculator Kivy
-package.name = calculator_kivy
+title = Calculator
+package.name = calculator
 package.domain = org.rayler
 source.dir = .
-source.include_exts = py,kv,png,jpg,ttf
-version = 0.1
-requirements = python3,kivy
+source.include_exts = py,kv
 orientation = portrait
 fullscreen = 0
 
-[buildozer]
-log_level = 2
-warn_on_root = 1
+requirements = python3,kivy
 
-[android]
-sdk = 24
-ndk = 25b
 android.api = 33
 android.minapi = 21
-android.ndk_api = 21
+android.ndk = 25b
+android.sdk = 33
+
+[buildozer]
+log_level = 2
+warn_on_root = 0
+
