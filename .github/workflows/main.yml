@@ -1,0 +1,27 @@
+from kivy.app import App
+from kivy.lang import Builder
+from kivy.uix.boxlayout import BoxLayout
+
+class Calculator(BoxLayout):
+    def calculate(self, operation):
+        try:
+            a = float(self.ids.num1.text)
+            b = float(self.ids.num2.text)
+
+            if operation == "+":
+                self.ids.result.text = str(a + b)
+            elif operation == "-":
+                self.ids.result.text = str(a - b)
+            elif operation == "*":
+                self.ids.result.text = str(a * b)
+            elif operation == "/":
+                self.ids.result.text = str(a / b)
+        except:
+            self.ids.result.text = "Error"
+
+class CalculatorApp(App):
+    def build(self):
+        return Builder.load_file("calculator.kv")
+
+if __name__ == "__main__":
+    CalculatorApp().run()
