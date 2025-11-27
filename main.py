@@ -1,12 +1,16 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 
-class CalculatorWindow(BoxLayout):
-    pass
+class Calculator(BoxLayout):
+    def calculate(self, expression):
+        try:
+            self.ids.result.text = str(eval(expression))
+        except:
+            self.ids.result.text = "Error"
 
-class CalculatorApp(App):
+class CalcApp(App):
     def build(self):
-        return CalculatorWindow()
+        return Calculator()
 
 if __name__ == "__main__":
-    CalculatorApp().run()
+    CalcApp().run()
