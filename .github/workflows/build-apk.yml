@@ -10,30 +10,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Linux dependencies
+      - name: Install system dependencies
         run: |
           sudo apt update
           sudo apt install -y \
             python3 python3-pip python3-setuptools python3-dev \
             build-essential git zip unzip \
-            openjdk-17-jdk pkg-config \
-            libltdl-dev autoconf automake libtool \
-            zlib1g zlib1g-dev libffi-dev libssl-dev
+            openjdk-17-jdk \
+            libffi-dev libssl-dev \
+            liblzma-dev zlib1g-dev \
+            gcc g++ \
+            pkg-config
 
-      - name: Install Cython & Buildozer
+      - name: Install Buildozer
         run: |
-          pip install --upgrade pip
-          pip install cython buildozer
+          pip install --upgrade cython buildozer virtualenv
 
       - name: Build APK
         run: |
           buildozer android debug
 
-      - name: Upload APK as artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
-          name: android-apk
+          name: CalculatorKivy-APK
           path: bin/*.apk
